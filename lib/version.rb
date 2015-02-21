@@ -5,4 +5,4 @@ if File.exists?('.build')
   end
 end
 
-VERSION = build || "0.0.#{Time.now.utc.to_i}"
+VERSION = build || "0.1.#{Time.now.utc.to_i}"

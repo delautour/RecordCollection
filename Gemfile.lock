@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    record-collection (0.0.1424542006)
+    record-collection (0.1.1424542204)
 
 GEM
   remote: https://rubygems.org/
