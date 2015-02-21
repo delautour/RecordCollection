@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'record-collection'
-  s.version     = '0.0.0'
+  s.version     = '0.0.1'
   s.date        = '2015-02-20'
   s.summary     = "Don't expose `ActiveRecord::Relation`s from controllers, expose `RecordCollections`!"
   s.description = <<-DESC
@@ -17,5 +17,6 @@ DESC
 
   s.add_development_dependency('rspec', "~> 3")
   s.add_development_dependency('activerecord', "~> 4")
+  s.add_development_dependency('sqlite3', "~> 1.3")
 
 end

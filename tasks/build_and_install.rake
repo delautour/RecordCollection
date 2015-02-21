@@ -8,7 +8,6 @@ class BuildAndInstall
 
     step { system("gem build #{GEMSPEC_PATH}") }
     step { system("gem install ./record-collection-#{spec.version}.gem") }
-
   end
 
   def step
