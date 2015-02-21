@@ -14,6 +14,6 @@ class Push
 end
 
 desc "Pushes the gem to RubyGems"
-task push: :build_and_install do
+task push: :build do
   Push.new.run
 end

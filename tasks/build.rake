@@ -1,8 +1,7 @@
 require_relative '../lib/version'
 
-class BuildAndInstall
+class Build
   require "rubygems"
-
   GEMSPEC_PATH = './record-collection.gemspec'
 
   def run
@@ -20,7 +19,6 @@ class BuildAndInstall
         File.delete('.build')
       end
     end
-    step { system("gem install ./bin/record-collection-#{VERSION}.gem") }
   end
 
   def step
@@ -29,7 +27,7 @@ class BuildAndInstall
   end
 end
 
-desc "Build and installs RecordCollection"
-task build_and_install: [:test] do
-  BuildAndInstall.new.run
+desc "Build the gem"
+task build: :test do
+  Build.new.run
 end
