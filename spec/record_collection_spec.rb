@@ -12,8 +12,9 @@ end
 
 class Test < ActiveRecord::Base
 
+  default_scope { where.not(name: "Exclude by default") }
   scope :with_name, ->(name) { where(name: name) }
-  scope :over_age, ->(age) { where("age > ?", age ) }
+  scope :over_age, ->(age) { where("age > ?", age) }
 end
 
 describe RecordCollection do
@@ -119,6 +120,17 @@ describe RecordCollection do
     it { should respond_to :to_h }
     it { should respond_to :zip }
 
+    context "when the base scope was a class" do
+      it "should yield objects accoprding to default scope" do
+        adam = Test.create(name: "Adam")
+        excluded_by_default = Test.create(name: "Exclude by default")
+        collection = RecordCollection.new(Test)
+
+        expect(collection).to include(adam)
+        expect(collection).to_not include(excluded_by_default)
+      end
+    end
+
     context "when `filter_by` has not been called" do
       it "should yield objects in scope the base scope" do
         adam = Test.create(name: "Adam")
@@ -130,8 +142,8 @@ describe RecordCollection do
       end
     end
 
-    context "when `filter_by` has not been called" do
-      it "should not yield filtered out of scopes" do
+    context "when `filter_by` has been called" do
+      it "should not yield filtered out by scopes" do
         adam_12 = Test.create(name: "Adam", age: 12)
         adam_21 = Test.create(name: "Adam", age: 21)
         bob = Test.create(name: "Bob")

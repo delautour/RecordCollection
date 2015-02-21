@@ -3,8 +3,17 @@ class RecordCollection
   require 'set'
 
   def initialize(base_scope)
-    self.base_scope = base_scope
+    self.base_scope = coerce_to_relation(base_scope)
     self.scopes = Set.new
+  end
+
+  def coerce_to_relation(base_scope)
+    if base_scope.respond_to?(:all)
+      base_scope.all
+    else
+      # rails 3
+      base_scope.scoped
+    end
   end
 
   def limit_by(scope)
