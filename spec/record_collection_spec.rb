@@ -77,7 +77,26 @@ describe RecordCollection do
 
       expect(collection.is_limited_by?(Test.with_name("Bob"))).to be false
     end
+  end
 
+  describe "limited_by?" do
+    it { should respond_to :limited_by? }
+
+    it "accepts an argument" do
+      expect { collection.limited_by?(Test.with_name("Foo")) }.to_not raise_error
+    end
+
+    it "returns true if `limit_by` has been called with the argument" do
+      collection.limit_by(Test.with_name("Foo"))
+
+      expect(collection.limited_by?(Test.with_name("Foo"))).to be true
+    end
+
+    it "returns false if `limit_by` has not been called with the argument" do
+      collection.limit_by(Test.with_name("Foo"))
+
+      expect(collection.limited_by?(Test.with_name("Bob"))).to be false
+    end
   end
 
   describe "enumeration" do
@@ -167,5 +186,13 @@ describe RecordCollection do
         expect(collection).to_not include(bob, adam_12)
       end
     end
+  end
+
+  describe "rspec integration" do
+    before :each do
+      collection.limit_by(Test.with_name("Foo"))
+    end
+
+    it { should be_limited_by(Test.with_name("Foo")) }
   end
 end

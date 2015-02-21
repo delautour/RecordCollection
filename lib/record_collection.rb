@@ -28,6 +28,8 @@ class RecordCollection
     scopes.any? { |s| s == scope }
   end
 
+  alias limited_by? is_limited_by?
+
   def each(&block)
     scopes.reduce(base_scope) { |scope, base| base.merge(scope) }.each(&block)
   end
