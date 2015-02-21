@@ -38,13 +38,24 @@ describe RecordCollection do
   describe "#limit_by" do
     it { should respond_to :limit_by }
 
-
     it "accepts an argument" do
       expect { collection.limit_by(Test.with_name("Foo")) }.to_not raise_error
     end
 
     it "returns it's self" do
       expect(collection.limit_by(Test.all)).to be collection
+    end
+  end
+
+  describe "#and" do
+    it { should respond_to :and }
+
+    it "accepts an argument" do
+      expect { collection.and(Test.with_name("Foo")) }.to_not raise_error
+    end
+
+    it "returns it's self" do
+      expect(collection.and(Test.all)).to be collection
     end
   end
 
@@ -148,8 +159,9 @@ describe RecordCollection do
         adam_21 = Test.create(name: "Adam", age: 21)
         bob = Test.create(name: "Bob")
 
-        collection.limit_by(Test.with_name("Adam"))
-        collection.limit_by(Test.over_age(20))
+        collection
+            .limit_by(Test.with_name("Adam"))
+            .and(Test.over_age(20))
 
         expect(collection).to include(adam_21)
         expect(collection).to_not include(bob, adam_12)

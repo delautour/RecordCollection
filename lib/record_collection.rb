@@ -21,6 +21,8 @@ class RecordCollection
     self
   end
 
+  alias and limit_by
+
   def is_limited_by?(scope)
     # because ActiveRecord::Relations do not implement hashing correctly, we must do case by case equality
     scopes.any? { |s| s == scope }
