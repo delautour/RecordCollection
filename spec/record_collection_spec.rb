@@ -194,5 +194,6 @@ describe RecordCollection do
     end
 
     it { should be_limited_by(Test.with_name("Foo")) }
+    it { should_not be_limited_by(Test.with_name("Adam")) }
   end
 end
