@@ -1,12 +1,10 @@
+require_relative '../lib/version'
+
 class Push
   require "rubygems"
 
-  GEMSPEC_PATH = './record-collection.gemspec'
-
   def run
-    spec = Gem::Specification::load(GEMSPEC_PATH)
-
-    step { system("gem push ./record-collection-#{spec.version}.gem") }
+    step { system("gem push ./bin/record-collection-#{VERSION}.gem") }
   end
 
   def step

@@ -1,6 +1,8 @@
+require_relative 'lib/version'
+
 Gem::Specification.new do |s|
   s.name        = 'record-collection'
-  s.version     = '0.0.1'
+  s.version     = VERSION
   s.date        = '2015-02-20'
   s.summary     = "Don't expose `ActiveRecord::Relation`s from controllers, expose `RecordCollections`!"
   s.description = <<-DESC
