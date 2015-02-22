@@ -72,6 +72,12 @@ describe RecordCollection do
       expect(collection.is_limited_by?(Test.with_name("Foo"))).to be true
     end
 
+    it "returns true if the collection was created with the argument" do
+      collection = RecordCollection.new(Test.with_name("Foo"))
+
+      expect(collection.is_limited_by?(Test.with_name("Foo"))).to be true
+    end
+
     it "returns false if `limit_by` has not been called with the argument" do
       collection.limit_by(Test.with_name("Foo"))
 
@@ -90,6 +96,12 @@ describe RecordCollection do
       collection.limit_by(Test.with_name("Foo"))
 
       expect(collection.limited_by?(Test.with_name("Foo"))).to be true
+    end
+
+    it "returns true if the collection was created with the argument" do
+      collection = RecordCollection.new(Test.with_name("Foo"))
+
+      expect(collection.is_limited_by?(Test.with_name("Foo"))).to be true
     end
 
     it "returns false if `limit_by` has not been called with the argument" do

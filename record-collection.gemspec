@@ -13,7 +13,7 @@ DESC
 
   s.authors     = ["Courtney de Lautour"]
   s.email       = 'courtney.de.lautour@gmail.com'
-  s.files       = ["lib/record_collection.rb"]
+  s.files       = ["lib/record-collection.rb"]
   s.homepage    = 'https://github.com/Amerdrix/RecordCollection'
   s.license     = 'MIT'
 

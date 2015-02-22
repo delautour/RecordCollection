@@ -1,6 +1,6 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'active_record'
-require_relative '../lib/record_collection'
+require_relative '../lib/record-collection'
 
 RSpec.configure do |config|
   ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
