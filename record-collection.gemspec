@@ -20,5 +20,6 @@ DESC
   s.add_development_dependency('rspec', "~> 3")
   s.add_development_dependency('activerecord', "~> 4")
   s.add_development_dependency('sqlite3', "~> 1.3")
+  s.add_development_dependency('rake')
 
 end
