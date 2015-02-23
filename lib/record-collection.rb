@@ -18,8 +18,8 @@ class RecordCollection
 
   def limit_by(scope=nil)
     raise ArgumentError, "A relation or block is required" if scope.nil? && !block_given?
-    scope ||= yield(base_scope)
-    scopes.add(scope)
+    # scope ||= yield(base_scope)
+    # scopes.add(scope)
     self
   end
 
