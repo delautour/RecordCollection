@@ -22,6 +22,7 @@ class RecordCollection
   end
 
   alias and limit_by
+  alias order_by limit_by
 
   def is_limited_by?(scope)
     # because ActiveRecord::Relations do not implement hashing correctly, we must do case by case equality
@@ -29,6 +30,9 @@ class RecordCollection
   end
 
   alias limited_by? is_limited_by?
+
+  alias is_ordered_by? is_limited_by?
+  alias ordered_by? is_ordered_by?
 
   def respond_to?(name)
     super || final_scope.respond_to?(name)

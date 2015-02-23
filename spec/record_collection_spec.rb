@@ -59,6 +59,18 @@ describe RecordCollection do
     end
   end
 
+  describe "#order_by" do
+    it { should respond_to :and }
+
+    it "accepts an argument" do
+      expect { collection.and(Test.with_name("Foo")) }.to_not raise_error
+    end
+
+    it "returns it's self" do
+      expect(collection.and(Test.all)).to be collection
+    end
+  end
+
   describe "is_limited_by?" do
     it { should respond_to :is_limited_by? }
 
@@ -188,7 +200,7 @@ describe RecordCollection do
       it "should not yield filtered out by scopes" do
         adam_12 = Test.create(name: "Adam", age: 12)
         adam_21 = Test.create(name: "Adam", age: 21)
-        bob = Test.create(name: "Bob")
+        bob = Test.create(name: "Bob", age: 21)
 
         collection
             .limit_by(Test.with_name("Adam"))
