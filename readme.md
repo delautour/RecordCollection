@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Amerdrix/RecordCollection.svg?branch=master)](https://travis-ci.org/Amerdrix/RecordCollection)
+
 # RecordCollections
 
 **Don't expose `ActiveRecord::Relation`s, expose `RecordCollections`!**
