@@ -45,6 +45,24 @@ describe RecordCollection do
     it "returns it's self" do
       expect(collection.limit_by(Test.all)).to be collection
     end
+
+    it "accepts a block" do
+      expect { collection.limit_by {} }.to_not raise_error
+    end
+
+    it "yields the base scope to the block" do
+      base_scope = Test.with_name("foo")
+      collection = RecordCollection.new(base_scope)
+
+      yielded_scope = nil
+
+      collection.limit_by { |s| yielded_scope = s }
+      expect(yielded_scope).to eq base_scope
+    end
+
+    it "requires an argument or block" do
+      expect { collection.limit_by() }.to raise_error(ArgumentError)
+    end
   end
 
   describe "#and" do
@@ -196,7 +214,7 @@ describe RecordCollection do
       end
     end
 
-    context "when `filter_by` has been called" do
+    context "when `filter_by` with an argument has been called" do
       it "should not yield filtered out by scopes" do
         adam_12 = Test.create(name: "Adam", age: 12)
         adam_21 = Test.create(name: "Adam", age: 21)
@@ -204,6 +222,21 @@ describe RecordCollection do
 
         collection
             .limit_by(Test.with_name("Adam"))
+            .and(Test.over_age(20))
+
+        expect(collection).to include(adam_21)
+        expect(collection).to_not include(bob, adam_12)
+      end
+    end
+
+    context "when `filter_by` with a block has been called" do
+      it "should not yield filtered out by scopes" do
+        adam_12 = Test.create(name: "Adam", age:  12)
+        adam_21 = Test.create(name: "Adam", age: 21)
+        bob = Test.create(name: "Bob", age: 21)
+
+        collection
+            .limit_by { |s| s.with_name("Adam") }
             .and(Test.over_age(20))
 
         expect(collection).to include(adam_21)
